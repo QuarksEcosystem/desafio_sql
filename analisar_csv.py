@@ -2,8 +2,11 @@ import csv
 from collections import defaultdict
 
 def analisar_csv(arquivo):
-    with open(arquivo, 'r', encoding='utf-8') as file:
+    with open(arquivo, 'r', encoding='utf-8-sig') as file:
         reader = csv.DictReader(file, delimiter=';')
+        
+        # Imprimir chaves disponíveis no CSV para diagnóstico
+        
         
         vendas_por_vendedor = defaultdict(float)
         vendas_por_cliente = defaultdict(int)
@@ -37,7 +40,7 @@ def analisar_csv(arquivo):
         # Ordenando vendas por vendedor
         vendas_ordenadas = sorted(vendas_por_vendedor.items(), key=lambda x: x[1], reverse=True)
 
-        print("Vendas por Vendedor:")
+        print("\nVendas por Vendedor:")
         for v, val in vendas_ordenadas:
             print(f"{v}: R$ {val:,.2f}".replace(',', 'X').replace('.', ',').replace('X', '.'))
 
