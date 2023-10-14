@@ -12,7 +12,7 @@ jupyter notebook. Para acessar o colab basta usar o seguinte link: <mark>https:/
 # Explicação do projeto - Python
 
 + Primeiramente, abrimos o arquivos csv com a função read_csv. Numa análise prévia do arquivo, é possível ver que o separador utilizado é o ponto e vírgula ';', portanto, precisamos explicitar usando o parâmetro 'sep' na função que o separador não é a vírgula, que é o separador default.
-+ É sempre aconselhável, quando trabalhando com um projeto com dados, realizar uma inspeção dos dados e tratar quaisquer problemas que possam estar contidos na base de dados, como colunas sem dados, colunas com nomes não intuitivos ou com tipos de dados não coerentes, assim como linhas duplicadas ou linhas vazias. É bom ressaltar que a exclusão ou não de uma linha ou coluna fica a critério da pessoa que está fazendo a análise, e talvez uma coluna sem dados, por exemplo, deva ser mantida paraque seja preenchida depois, caso isto faça sentido.
++ É sempre aconselhável, quando trabalhando com um projeto com dados, realizar uma inspeção dos dados e tratar quaisquer problemas que possam estar contidos na base de dados, como colunas sem dados, colunas com nomes não intuitivos ou com tipos de dados não coerentes, assim como linhas duplicadas ou linhas vazias. É bom ressaltar que a exclusão ou não de uma linha ou coluna fica a critério da pessoa que está fazendo a análise, e talvez uma coluna sem dados, por exemplo, deva ser mantida para que seja preenchida depois, caso isto faça sentido.
 + No código realizei as seguintes etapas de tratamento:
   1. exclusão de uma coluna que não continha nenhum dado e que não estava no arquivo csv original, a coluna 'Unnamed: 10';
   2. conversão do tipo da coluna 'Valor' de string para float, para que fosse possível realizar análises numéricas;
@@ -38,8 +38,8 @@ jupyter notebook. Para acessar o colab basta usar o seguinte link: <mark>https:/
 <p>Finalmente, para o caso vendedor-equipe, foi escolhida a cardinalidade de n vendedores para 1 ou nenhuma equipe. Esta escolha se dá pois uma equipe precisa ter pelo menos n vendedores para ser considerada uma equipe, e um vendedor pode ou não ser parte de uma equipe, mas apenas uma equipe.</p>
 
 ## Queries MySQL
-1. A primeira query faz seleciona as ids na tabela venda e os nomes dos clientes na tabela de clientes, fazendo um inner join entre as tabelas, ou seja, pegando apenas correpondências que tenham um match em ambas as tabelas Venda e Clientes, e aplicando um filtro de forma que apenas as vendas realizadas no ano de 2020 sejam mostradas.
-2. A segunda query seleciona os ids dos vendedores, seus nomes e o nome da equipe na tabela Equipe. Neste Caso um left join é aplicado, pois, como explicado anteriormente, um vendedor pode ou não ter uma equipe, o left join irá unir os vendedores e as equipes mesmo que alguns vendedores não tenham equipe.
+1. A primeira query seleciona as ids na tabela venda e os nomes dos clientes na tabela de clientes, fazendo um inner join entre as tabelas, ou seja, pegando apenas correpondências que tenham um match em ambas as tabelas Venda e Cliente, e aplicando um filtro de forma que apenas as vendas realizadas no ano de 2020 sejam mostradas.
+2. A segunda query seleciona os ids dos vendedores e seus nomes na tabela Vendedor e o nome da equipe na tabela Equipe. Neste Caso um left join é aplicado, pois, como explicado anteriormente, um vendedor pode ou não ter uma equipe, o left join irá unir os vendedores e as equipes mesmo que alguns vendedores não tenham equipe.
 
 ## Tabela Resultado Trimestral
 <p>A tabela ResultadosTrimestrais foi criada com os seguintes campos: id (primary key), ano, trimestre e valorTotal. Para preencher esta tabela, a query utilizada, também presente no arquivo pdf, tem a seguinte lógica: seleciona o ano da venda, o trimestre da venda e a soma dos valores aplicando o filtro onde escolhemos quais são o ano e o trimestre da venda.</p>
