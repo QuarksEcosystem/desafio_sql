@@ -63,7 +63,6 @@ WHERE
     YEAR(venda.data) = 2020;
 
 
-
 SELECT
     vendedor.nome,
     equipe.nome
@@ -80,9 +79,8 @@ GROUP BY
 
 
 SELECT
-    COUNT(*),
-    SUM(venda.valor)
-FROM
-    venda
-WHERE
-    MONTH(venda.data) in (1, 2, 3)
+  EXTRACT(YEAR FROM data) AS ano,
+  EXTRACT(QUARTER FROM data) AS trimestre,
+  SUM(valor) AS valor
+FROM   venda
+GROUP BY   ano,   trimestre;
