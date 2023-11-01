@@ -34,11 +34,7 @@ O script em Python realiza as seguintes operações:
 
 4. **Apresentação dos Resultados:** Exibe os resultados da análise no console.
 
-## Considerações Finais
 
-O script oferece uma análise inicial dos dados contidos no arquivo 'DB_Teste.csv'. Ele pode ser expandido ou modificado para atender a requisitos adicionais ou realizar análises mais complexas, dependendo das necessidades.
-
-Em caso de dúvidas ou sugestões para melhorias, sinta-se à vontade para entrar em contato.
 
 # Projeto de Análise de Dados - Instruções e Consultas SQL
 
@@ -68,4 +64,23 @@ SELECT YEAR(`Data da Venda`) AS Ano,
        SUM(Valor) AS TotalVendas
 FROM DB_Teste
 GROUP BY YEAR(`Data da Venda`), QUARTER(`Data da Venda`);
+
+### Consulta 3: Listar a equipe de cada vendedor
+
+```sql
+SELECT Vendedor, Equipe
+FROM DB_Teste
+GROUP BY Vendedor, Equipe;
+
+### Considerações Finais - Programa em Python
+
+O programa em Python apresenta uma análise básica dos dados contidos no arquivo 'DB_Teste.csv'. Ele calcula métricas como vendas totais por vendedor, identifica o cliente com o maior e menor volume de vendas, calcula a média de vendas por tipo e conta o número de vendas por cliente. Essas métricas fornecem uma visão inicial dos dados, podendo ser ampliadas ou ajustadas para análises mais detalhadas ou específicas, conforme as necessidades do projeto.
+
+### Considerações Finais - Consultas SQL
+
+As consultas SQL fornecidas visam atender a diferentes requisitos de análise sobre o banco de dados 'DB_Teste'. A primeira consulta lista todas as vendas (ID), clientes e datas de venda no ano de 2020. A segunda constrói uma tabela que avalia os resultados das vendas trimestralmente, apresentando o total de vendas por trimestre. Por fim, a terceira consulta lista a equipe de cada vendedor.
+
+Essas consultas oferecem informações específicas a partir do banco de dados, possibilitando a análise e obtenção de insights relevantes sobre as vendas registradas.
+
+Caso haja necessidade de ampliação, modificação ou suporte adicional em relação ao programa em Python ou às consultas SQL, estou à disposição para fornecer orientação e suporte.
 
