@@ -42,19 +42,19 @@ with open('DB_Teste.csv', newline='') as csvfile:
 
 sorted_seller_sales = {k: v for k, v in sorted(seller_sales.items(), key=lambda item: item[1], reverse=True)}
 
-print('Total sales by seller:')
+print('Vendas totais por vendedor:')
 for seller, sales in sorted_seller_sales.items():
     print(f'{seller}: R$ {sales:.2f}')
 
-print(f'Customer with highest sale: {highest_sale_client} (R$ {highest_sale:.2f})')
-print(f'Customer with lowest sale: {lowest_sale_client} (R$ {lowest_sale:.2f})')
+print(f'Cliente com o maior volume de vendas: {highest_sale_client} (R$ {highest_sale:.2f})')
+print(f'Cliente com menor número de vendas: {lowest_sale_client} (R$ {lowest_sale:.2f})')
 
 avg_sales_by_type = {k: v / count_by_type[k] for k, v in sales_by_type.items() if count_by_type[k] > 0}
 
-print('Average sales by type:')
+print('Valor média de vendos por tipo:')
 for sales_type, avg_sales in avg_sales_by_type.items():
     print(f'{sales_type}: R$ {avg_sales:.2f}')
 
-print('Number of sales by customer:')
+print('Número de vendas por cliente:')
 for customer, sales_count in sales_by_customer.items():
     print(f'{customer}: {sales_count}')
