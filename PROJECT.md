@@ -51,14 +51,14 @@ Este projeto visa a análise de um banco de dados usando consultas SQL para extr
 
 ### Consulta 1: Listar todas as vendas (ID), clientes e datas de venda no ano de 2020
 
-```sql
+``sql
 SELECT ID, Cliente, `Data da Venda`
 FROM DB_Teste
 WHERE YEAR(`Data da Venda`) = 2020;
 
 ### Consulta 2: Construir uma tabela que avalia os resultados das vendas trimestralmente
 
-```sql
+``sql
 SELECT YEAR(`Data da Venda`) AS Ano, 
        QUARTER(`Data da Venda`) AS Trimestre, 
        SUM(Valor) AS TotalVendas
@@ -67,7 +67,7 @@ GROUP BY YEAR(`Data da Venda`), QUARTER(`Data da Venda`);
 
 ### Consulta 3: Listar a equipe de cada vendedor
 
-```sql
+``sql
 SELECT Vendedor, Equipe
 FROM DB_Teste
 GROUP BY Vendedor, Equipe;
