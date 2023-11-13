@@ -1,5 +1,5 @@
 # Estágio Desenvolvedor SQL
-## Status: Concluído  
+## TRECHO: Python - Status: Concluído  
 ## Implemente em python um programa que tenha como entradas o arquivo CSV e realize as seguintes tarefas:
 
 	Construa uma tabela auxiliar que sumarize o valor vendido por cada vendedor, ordenando do maior para o menor;
