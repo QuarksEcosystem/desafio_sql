@@ -33,6 +33,70 @@ As seguintes ferramentas foram usadas na construção do projeto:</br>
 - Bibliotecas:
  -  [Pandas](https://pandas.pydata.org/)
 
+
+
+## TRECHO: SQL - Status: Concluído  
+
+
+### Construir o Modelo de Relacionamento com as Categorias Utilizadas em Todos os Campos do Arquivo CSV
+
+ -  [Imagem](https://drive.google.com/drive/folders/1okN5hH5_StBtTQdpRW099liRLUo_naWu?usp=sharing)
+
+
+```sql
+-- Criar tabela para armazenar as informações
+CREATE TABLE Vendas (
+    Cliente VARCHAR2(255),
+    ID VARCHAR2(10),
+    Tipo VARCHAR2(255),
+    Data_da_Venda DATE,
+    Categoria VARCHAR2(255),
+    Vendedor VARCHAR2(255),
+    Regional VARCHAR2(255),
+    Duracao_do_Contrato_Meses NUMBER,
+    Equipe VARCHAR2(255),
+    Valor NUMBER
+);
+
+-- Para carregar os dados do CSV, podemos usar o SQL*Loader ou funções INSERT.
+
+-- Adicionar índices conforme necessário para otimizar consultas.
+```
+
+### Listar Todas as Vendas (ID) e Seus Respectivos Clientes Apenas no Ano de 2020
+
+```sql
+SELECT ID, Cliente
+FROM Vendas
+WHERE EXTRACT(YEAR FROM Data_da_Venda) = 2020;
+```
+
+### Listar a Equipe de Cada Vendedor
+
+```sql
+SELECT DISTINCT Vendedor, Equipe
+FROM Vendas;
+```
+
+### Construir uma Tabela que Avalia Trimestralmente o Resultado de Vendas e Plote um Gráfico Deste Histórico
+
+Para criar uma tabela que avalia trimestralmente o resultado de vendas, você pode usar a função `TRUNC` para agrupar por trimestre. No Oracle, você pode usar o seguinte código:
+
+```sql
+CREATE TABLE Resultado_Trimestral AS
+SELECT 
+    TRUNC(Data_da_Venda, 'Q') AS Trimestre,
+    SUM(Valor) AS Total_Vendas
+FROM Vendas
+GROUP BY TRUNC(Data_da_Venda, 'Q')
+ORDER BY Trimestre;
+
+-- Para plotar um gráfico, podemos usar ferramentas como Oracle SQL Developer.
+```
+
+Se precisar de mais esclarecimentos ou tiver dúvidas específicas, estou à disposição.
+
+
 ### Autor
 <a>
  <img style="border-radius: 50%;" src="https://avatars.githubusercontent.com/u/83680277?v=4" width="100px;" alt="Imagem do autor"/>
