@@ -60,7 +60,6 @@ CREATE TABLE Vendas (
 
 -- Para carregar os dados do CSV, podemos usar o SQL*Loader ou funções INSERT.
 
--- Adicionar índices conforme necessário para otimizar consultas.
 ```
 
 ### Listar Todas as Vendas (ID) e Seus Respectivos Clientes Apenas no Ano de 2020
@@ -80,7 +79,7 @@ FROM Vendas;
 
 ### Construir uma Tabela que Avalia Trimestralmente o Resultado de Vendas e Plote um Gráfico Deste Histórico
 
-Para criar uma tabela que avalia trimestralmente o resultado de vendas, você pode usar a função `TRUNC` para agrupar por trimestre. No Oracle, você pode usar o seguinte código:
+Para criar uma tabela que avalia trimestralmente o resultado de vendas, iremos usar a função `TRUNC` para agrupar por trimestre. No Oracle, usaremos o seguinte codigo:
 
 ```sql
 CREATE TABLE Resultado_Trimestral AS
@@ -93,8 +92,6 @@ ORDER BY Trimestre;
 
 -- Para plotar um gráfico, podemos usar ferramentas como Oracle SQL Developer.
 ```
-
-Se precisar de mais esclarecimentos ou tiver dúvidas específicas, estou à disposição.
 
 
 ### Autor
