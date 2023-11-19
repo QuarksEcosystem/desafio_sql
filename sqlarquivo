@@ -1,0 +1,54 @@
+# Criei um modelo de relacionamento
+
+CREATE TABLE Cliente (
+    ID INT PRIMARY KEY,
+    Nome VARCHAR(255),
+    -- Outras colunas relacionadas aos clientes
+);
+
+CREATE TABLE Vendedor (
+    ID INT PRIMARY KEY,
+    Nome VARCHAR(255),
+    Equipe VARCHAR(255),
+    -- Outras colunas relacionadas aos vendedores
+);
+
+CREATE TABLE Venda (
+    ID INT PRIMARY KEY,
+    ClienteID INT,
+    VendedorID INT,
+    DataDaVenda DATE,
+    Categoria VARCHAR(255),
+    Valor DECIMAL(10, 2),
+    -- Outras colunas relacionadas às vendas
+    FOREIGN KEY (ClienteID) REFERENCES Cliente(ID),
+    FOREIGN KEY (VendedorID) REFERENCES Vendedor(ID)
+);
+
+CREATE TABLE Categoria (
+    ID INT PRIMARY KEY,
+    Nome VARCHAR(255)
+    -- Outras colunas relacionadas às categorias, se necessário
+);
+
+
+
+# Aqui listei todos clientes exclusivamente de 2020
+SELECT V.ID AS VendaID, C.Nome AS ClienteNome
+FROM Venda V
+JOIN Cliente C ON V.ClienteID = C.ID
+WHERE YEAR(V.DataDaVenda) = 2020;
+
+# Neste listei cada equipe de cada vendedor
+SELECT Nome AS VendedorNome, Equipe
+FROM Vendedor;
+
+
+# aqui um protótipo da tabela que avalia trimestralmente
+SELECT 
+    YEAR(DataDaVenda) AS Ano,
+    QUARTER(DataDaVenda) AS Trimestre,
+    SUM(Valor) AS TotalVendas
+FROM Venda
+GROUP BY YEAR(DataDaVenda), QUARTER(DataDaVenda)
+ORDER BY Ano, Trimestre;
