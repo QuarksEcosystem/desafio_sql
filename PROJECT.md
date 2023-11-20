@@ -1,3 +1,5 @@
+Vítor Augusto Casemiro Dos Santos/   19/11/2023
+
 Primeiramente, execute o codigo CSVphyton.py em qualquer compilador, nele está o algoritmo para ordenar os clientes com venda maior para menor, o valor médio e número de vendas realizada por cada cliente
 Também está incluso o valor total que cada vendedor vendeu, junto com a tabela ordenando os vendedores
 
