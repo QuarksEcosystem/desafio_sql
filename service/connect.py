@@ -1,6 +1,11 @@
 import psycopg2
 
 def init_connection():
+    """_summary_ : Connect to PostgreSQL database
+
+    Returns:
+        _type_: psycopg2.connection
+    """
     conn = psycopg2.connect(
         host="localhost",
         database="DB_teste",

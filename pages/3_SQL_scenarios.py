@@ -1,40 +1,37 @@
 import streamlit as st
 from service.connect import init_connection
-from sql_consults.sql import executar_consulta_sql, executar_instrucao_sql
+from sql_consults.sql import delete_venda, fill_database
 from Homepage import data
-
-st.title("SQL scenarios")
+from service.connect import init_connection
+from functions_sql import get_sales_2020, get_team, quarterly_sales
+import pandas as pd
+import matplotlib.pyplot as plt
 
 conn = init_connection()
+st.title("SQL scenarios")
 
-nomes_clientes_unicos = data['Cliente'].unique()
-st.dataframe(nomes_clientes_unicos)
+# Limitar para executar apenas uma vez
 
+#delete_venda(conn)
+fill_database(data, conn)
 
-if conn:
-    st.title("Aplicativo Streamlit com PostgreSQL")
+# Listar todas as vendas (ID) e seus respectivos clientes apenas no ano de 2020
+st.dataframe(get_sales_2020(conn))
 
-    for nome_cliente in nomes_clientes_unicos:
-        query_insercao = f"INSERT INTO CLIENTE (Nome) VALUES ('{nome_cliente}') ON CONFLICT (Nome) DO NOTHING;"
-        executar_instrucao_sql(query_insercao, conn)
+# Listar a equipe de cada vendedor
+st.dataframe(get_team(conn))
 
-    st.success("Nomes únicos inseridos na tabela de clientes.")
-else:
-    st.warning("A conexão com o banco de dados não foi bem-sucedida.")
+# Construir uma tabela que avalia trimestralmente o resultado de vendas e plote um gráfico deste histórico.
 
+# Plotar um gráfico de barras
+df = quarterly_sales(conn)
+plt.figure(figsize=(10, 6))
+for ano in df['ano'].unique():
+    df_ano = df[df['ano'] == ano]
+    plt.bar(df_ano['trimestre'], df_ano['valor'], label=str(ano))
 
-
-if conn:    
-    st.title("Aplicativo Streamlit com PostgreSQL")
-
-    # Exemplo de consulta SQL
-    query = "SELECT * FROM CLIENTE;"
-
-    # Executar a consulta e exibir os resultados
-    df_resultado = executar_consulta_sql(query, conn)
-
-    if df_resultado is not None:
-        st.write("Resultados da consulta:")
-        st.write(df_resultado)
-else:
-    st.warning("A conexão com o banco de dados não foi bem-sucedida.")
+plt.xlabel('Trimestre')
+plt.ylabel('Valor de Vendas')
+plt.title('Resultado de Vendas por Trimestre')
+plt.legend()
+st.pyplot(plt)

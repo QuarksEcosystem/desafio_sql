@@ -17,7 +17,3 @@ data['Data da Venda'] = data['Data da Venda'].dt.date
 
 st.dataframe(data)
 data['Valor'] = data['Valor'].str.replace(' ', '').str.replace('R\$', '', regex=True).str.replace('.', '').str.replace(',', '.').astype(float)
-
-
-
-
