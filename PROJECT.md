@@ -64,7 +64,7 @@ streamlit run Homepage.py
 O modo como foi construído o projeto é em criar funções para retornar os resultados esperados e assim mostrá-los por meio do Streamlit, que permite a apresentação em dataframes, gráficos, etc. Está abordagem é muito confortável para a utilização conjunta do pandas.
 
 ## Homepage
-- Na primeira página temos apenas uma tabela (tratada como dataframe) que representa o arauivo CSV;
+- Na primeira página temos apenas uma tabela (tratada como dataframe) que representa o arquivo CSV;
 
 ## CSV tasks
 Nesta página foram realizadas as primeiras atividades pedidas, foram implementadas funções no arquivo functions_tasks.py que retornam os dataframes referentes aos objetivos.
