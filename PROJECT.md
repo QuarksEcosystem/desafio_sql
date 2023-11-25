@@ -15,7 +15,7 @@ sudo apt-get install python3-pip
 ```shell
 cd desafio_sql_streamlit
 ```
-- Cria um ambiente virtual (Este passo é importante pois o streamlit recomenda o uso de um venv):
+- Criar um ambiente virtual (Este passo é importante pois o streamlit recomenda o uso de um venv):
 ```shell
 python -m venv .venv
 ```
