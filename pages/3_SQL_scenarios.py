@@ -7,13 +7,16 @@ import matplotlib.pyplot as plt
 import matplotlib.ticker as mticker
 
 conn = init_connection()
-st.title("SQL scenarios")
+st.title("SQL Scenarios")
 
 # Create the tables in the database
 create_tables(conn)
 
 # Fill the tables with the data
 fill_database(data, conn)
+
+st.subheader("Diagrama Entidade Relacionamento")
+st.image("/home/kleber/desafio_sql_streamlit/pages/erd_diagram.png", width=1200)
 
 col1, col2 = st.columns(2)
 
