@@ -1,6 +1,6 @@
 import streamlit as st
 from service.connect import init_connection
-from sql_consults.sql import fill_database
+from sql_consults.sql import fill_database, create_tables
 from Homepage import data
 from functions_sql import get_sales_2020, get_team, quarterly_sales
 import matplotlib.pyplot as plt
@@ -9,6 +9,10 @@ import matplotlib.ticker as mticker
 conn = init_connection()
 st.title("SQL scenarios")
 
+# Create the tables in the database
+create_tables(conn)
+
+# Fill the tables with the data
 fill_database(data, conn)
 
 col1, col2 = st.columns(2)
@@ -26,7 +30,7 @@ with col2:
 col3, col4 = st.columns(2)
 
 with col3:
-    # Construct a table with the sales per quarter.
+    # Construct a table with the sales per quarter
     st.subheader("Vendas por trimestre")
     df = quarterly_sales(conn)
     df['ano'] = df['ano'].astype(int)
