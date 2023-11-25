@@ -18,6 +18,7 @@ fill_database(data, conn)
 st.subheader("Diagrama Entidade Relacionamento")
 st.image("/home/kleber/desafio_sql_streamlit/pages/erd_diagram.png", width=1200)
 
+# Define the columns to be used in the layout
 col1, col2 = st.columns(2)
 
 with col1:
@@ -36,8 +37,11 @@ with col3:
     # Construct a table with the sales per quarter
     st.subheader("Vendas por trimestre")
     df = quarterly_sales(conn)
-    df['ano'] = df['ano'].astype(int)
+    df['ano'] = df['ano'].astype(int).astype(str)
     df['trimestre'] = df['trimestre'].astype(int)
+    df['valor'] = df['valor'].astype(str)
+    df['valor'] = 'R$ ' + df['valor'].apply(lambda x: '{:,.2f}'.format(float(x)))
+
     st.dataframe(df, width=600)
 
 with col4:
