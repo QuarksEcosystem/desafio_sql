@@ -5,7 +5,7 @@ import pandas as pd
 st.set_page_config(page_title="Streamlit Homepage", page_icon=":smiley:", layout="wide")
 
 # Defining the sidebar
-st.title("Dashboard")
+st.title("Tabela da base de dados")
 st.sidebar.success("Selecione uma página no menu lateral.")
 
 # Read the CSV file and organize the data with pré-processing

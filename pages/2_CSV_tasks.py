@@ -3,17 +3,17 @@ from Homepage import data
 from functions_tasks import best_seller, best_client, mean_type_sale, sale_per_client
 
 st.title("CSV Tasks")
-# Transform values from 'Valor' column to float
 
+# Print the seller responsible for the highest sale in descending order
 data_best_seller = best_seller(data)
 
-# Imprima e identifica qual foi o cliente responsável pela venda com maior valor e com menor valor;
+# Print the client responsible for the highest and lowest sale
 data_best_cliente = best_client(data)
 
-# Imprima valor médio por Tipo de venda (Serviços, Licenciamento, Produtos);
+# Print the mean of each type of sale
 data_mean = mean_type_sale(data)
 
-# Imprima o número de vendas por cliente;
+# Print the number of sales per client
 data_sale_per_client = sale_per_client(data)
 
 col1, col2 = st.columns(2)

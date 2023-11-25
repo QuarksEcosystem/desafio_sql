@@ -1,37 +1,61 @@
 import streamlit as st
 from service.connect import init_connection
-from sql_consults.sql import delete_venda, fill_database
+from sql_consults.sql import fill_database
 from Homepage import data
-from service.connect import init_connection
 from functions_sql import get_sales_2020, get_team, quarterly_sales
-import pandas as pd
 import matplotlib.pyplot as plt
+import matplotlib.ticker as mticker
 
 conn = init_connection()
 st.title("SQL scenarios")
 
-# Limitar para executar apenas uma vez
-
-#delete_venda(conn)
 fill_database(data, conn)
 
-# Listar todas as vendas (ID) e seus respectivos clientes apenas no ano de 2020
-st.dataframe(get_sales_2020(conn))
+col1, col2 = st.columns(2)
 
-# Listar a equipe de cada vendedor
-st.dataframe(get_team(conn))
+with col1:
+    st.subheader("Vendas e seus respectivos clientes (2020)")
+    # List all the values of sales and their respective clients in 2020
+    st.dataframe(get_sales_2020(conn), width=600)
 
-# Construir uma tabela que avalia trimestralmente o resultado de vendas e plote um gráfico deste histórico.
+with col2:
+    st.subheader("Equipe de cada vendedor")
+    # List each seller and their respective team
+    st.dataframe(get_team(conn), width=600)
 
-# Plotar um gráfico de barras
-df = quarterly_sales(conn)
-plt.figure(figsize=(10, 6))
-for ano in df['ano'].unique():
-    df_ano = df[df['ano'] == ano]
-    plt.bar(df_ano['trimestre'], df_ano['valor'], label=str(ano))
+col3, col4 = st.columns(2)
 
-plt.xlabel('Trimestre')
-plt.ylabel('Valor de Vendas')
-plt.title('Resultado de Vendas por Trimestre')
-plt.legend()
-st.pyplot(plt)
+with col3:
+    # Construct a table with the sales per quarter.
+    st.subheader("Vendas por trimestre")
+    df = quarterly_sales(conn)
+    df['ano'] = df['ano'].astype(int)
+    df['trimestre'] = df['trimestre'].astype(int)
+    st.dataframe(df, width=600)
+
+with col4:
+    # Plot the graph of sales per quarter.
+    st.subheader("Gráfico de vendas por trimestre")
+    fig, ax = plt.subplots(figsize=(10, 6))
+
+    # Offset to separate the bars of each year
+    offset = 0.2
+
+    for i, ano in enumerate(df['ano'].unique()):
+        df_ano = df[df['ano'] == ano]
+
+        plt.bar(df_ano['trimestre'] + i * offset, df_ano['valor'], width=0.2, label=str(ano))
+
+    plt.xlabel('Trimestres') 
+    plt.ylabel('Valor de Vendas')
+    plt.title('Resultado de Vendas por Trimestre')
+
+    formatter = mticker.FuncFormatter(lambda x, _: f'{x / 1e6:.0f}M')
+    plt.gca().yaxis.set_major_formatter(formatter)
+
+    quarters_labels = [f"{int(trimestre)}º trimestre" for trimestre in df['trimestre']]
+    plt.xticks(ticks=df['trimestre'] + ((len(df['ano'].unique()) - 1) / 2) * offset, labels=quarters_labels)
+
+    plt.legend()
+    plt.tight_layout() 
+    st.pyplot(plt)

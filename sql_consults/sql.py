@@ -35,24 +35,6 @@ def execute_sql_instruction(query, conn):
         st.error(f"Erro ao executar a instrução SQL: {e}")
 
 
-def delete_venda(conn):
-    """_summary_ : Delete all records from VENDA table
-
-    Args:
-        conn (_type_): psycopg2.connection
-    """
-    try:
-        # Construa a instrução SQL para deletar todos os registros
-        query_delete = "DELETE FROM VENDA;"
-
-        # Execute a instrução SQL
-        execute_sql_instruction(query_delete, conn)
-
-        st.success("Todos os registros da tabela VENDA foram deletados com sucesso.")
-    except Exception as e:
-        st.error(f"Erro ao deletar todos os registros: {e}")
-
-
 def fill_database(data, conn):
     """_summary_ : Fill the database with the data from the dataframe
 
